@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Game Over - AI Traitors</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="result">
+
+        <div class="logo">
+            🏆
+        </div>
+
+
+        <h1>GAME OVER</h1>
+
+
+        {% if winner == "Faithfuls" %}
+
+            <h2>😇 FAITHFULS WIN!</h2>
+
+            <p>
+                The Traitor has been eliminated.
+            </p>
+
+        {% else %}
+
+            <h2>😈 TRAITORS WIN!</h2>
+
+            <p>
+                The Traitor has taken control.
+            </p>
+
+        {% endif %}
+
+
+        <!-- SURVIVORS -->
+
+        <div class="panel">
+
+            <h2>👥 Final Players</h2>
+
+            {% for player in players %}
+
+                {% if player in alive_players %}
+
+                    <p>
+                        🟢 {{ player }} — ALIVE
+                    </p>
+
+                {% else %}
+
+                    <p>
+                        🔴 {{ player }} — ELIMINATED
+                    </p>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- SECRET TRAITOR -->
+
+        <div class="panel">
+
+            <h2>🎭 The Traitor Was</h2>
+
+            <h2>
+                😈 {{ traitor }}
+            </h2>
+
+        </div>
+
+
+        <!-- HISTORY -->
+
+        <div class="panel">
+
+            <h2>📜 Game History</h2>
+
+            {% for event in history %}
+
+                <p>
+                    {{ event }}
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+
+        <br>
+
+
+        <a href="/">
+
+            <button>
+                🔄 PLAY AGAIN
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

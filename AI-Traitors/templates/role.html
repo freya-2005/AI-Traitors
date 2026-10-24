@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Secret Role</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    {% if single_player %}
+
+        <div class="logo">
+            🔐
+        </div>
+
+        <h1>SECRET ROLE</h1>
+
+        <div class="panel">
+
+            <h2>{{ single_player }}</h2>
+
+            <p class="hint">
+                This information is private.
+            </p>
+
+            <button onclick="revealRole()">
+                REVEAL MY ROLE
+            </button>
+
+            <div id="roleBox"
+                 style="display:none;">
+
+                <div class="logo">
+                    {{ emoji }}
+                </div>
+
+                <h1>{{ role }}</h1>
+
+                <p>
+                    {{ description }}
+                </p>
+
+                <button onclick="hideRole()">
+                    HIDE ROLE
+                </button>
+
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <div class="logo">
+            🎭
+        </div>
+
+        <h1>SECRET ROLES</h1>
+
+        <p class="subtitle">
+            Pass the device to each player.
+        </p>
+
+        <div class="panel">
+
+            <h2>Players</h2>
+
+            {% for player in players %}
+
+                <p>
+                    <a href="/role/{{ player }}">
+                        🔒 {{ player }} — Reveal Role
+                    </a>
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<script>
+
+function revealRole() {
+
+    document.getElementById("roleBox").style.display = "block";
+
+}
+
+function hideRole() {
+
+    document.getElementById("roleBox").style.display = "none";
+
+}
+
+</script>
+
+</body>
+
+</html>

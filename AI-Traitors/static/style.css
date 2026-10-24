@@ -1,0 +1,710 @@
+/* =========================================
+   AI TRAITORS - MODERN GAME UI
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #07070b;
+    --card: rgba(20, 20, 30, 0.88);
+    --card-light: rgba(35, 35, 48, 0.9);
+    --border: rgba(255, 255, 255, 0.12);
+    --text: #f5f5f7;
+    --muted: #a6a6b0;
+    --accent: #9b5cff;
+    --accent2: #ff3d81;
+    --green: #32e875;
+    --red: #ff4d67;
+}
+
+/* =========================================
+   BODY
+   ========================================= */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(155, 92, 255, 0.20),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(255, 61, 129, 0.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(70, 100, 255, 0.10),
+            transparent 35%
+        ),
+        var(--bg);
+
+    overflow-x: hidden;
+}
+
+/* subtle background grid */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* =========================================
+   MAIN CONTAINERS
+   ========================================= */
+
+.container {
+    width: min(92%, 1000px);
+    margin: auto;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.game-container {
+    width: min(94%, 1200px);
+    margin: auto;
+    padding: 35px 20px;
+}
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.logo {
+    width: 95px;
+    height: 95px;
+
+    margin: 10px auto 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 52px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(155, 92, 255, 0.25),
+            rgba(255, 61, 129, 0.15)
+        );
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.45),
+        0 0 45px rgba(155,92,255,0.12);
+}
+
+/* =========================================
+   HEADINGS
+   ========================================= */
+
+h1 {
+    margin: 10px 0;
+
+    font-size: clamp(38px, 7vw, 68px);
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #c9a7ff,
+            #ff8bb4
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    font-size: 27px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* =========================================
+   PANELS
+   ========================================= */
+
+.panel {
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,30,42,0.92),
+            rgba(12,12,18,0.92)
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    margin: 25px 0;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+
+    backdrop-filter: blur(12px);
+}
+
+.panel::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 10%;
+    right: 10%;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(155,92,255,0.7),
+            transparent
+        );
+}
+
+/* =========================================
+   INPUTS
+   ========================================= */
+
+input,
+select {
+    width: min(90%, 650px);
+
+    padding: 16px 18px;
+
+    margin: 10px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,0.14);
+
+    background: rgba(0,0,0,0.35);
+
+    color: white;
+
+    font-size: 16px;
+
+    outline: none;
+
+    transition: 0.25s;
+}
+
+input::placeholder {
+    color: #777782;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 0 3px rgba(155,92,255,0.12),
+        0 0 25px rgba(155,92,255,0.12);
+}
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+button {
+    border: none;
+
+    padding: 14px 28px;
+
+    margin: 8px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #dcd4ff
+        );
+
+    color: #101014;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02);
+
+    box-shadow:
+        0 10px 30px rgba(255,255,255,0.12);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* =========================================
+   LINKS
+   ========================================= */
+
+a {
+    color: #bfa2ff;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+a:hover {
+    color: white;
+}
+
+/* =========================================
+   PLAYER GRID
+   ========================================= */
+
+.players {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(190px, 1fr));
+
+    gap: 18px;
+
+    margin-top: 25px;
+}
+
+/* =========================================
+   PLAYER CARD
+   ========================================= */
+
+.player-card {
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35,35,48,0.95),
+            rgba(15,15,22,0.95)
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    transition:
+        transform 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(155,92,255,0.5);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.4);
+}
+
+.player-card h3 {
+    margin-bottom: 8px;
+}
+
+/* =========================================
+   ALIVE STATUS
+   ========================================= */
+
+.status {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    background:
+        rgba(50,232,117,0.10);
+
+    color: var(--green);
+
+    border:
+        1px solid rgba(50,232,117,0.25);
+}
+
+/* =========================================
+   ELIMINATED PLAYER
+   ========================================= */
+
+.player-card.dead {
+    opacity: 0.38;
+
+    filter: grayscale(0.7);
+
+    transform: none;
+}
+
+.player-card.dead .status {
+    color: var(--red);
+
+    background:
+        rgba(255,77,103,0.10);
+
+    border-color:
+        rgba(255,77,103,0.25);
+}
+
+/* =========================================
+   PHASE
+   ========================================= */
+
+.phase {
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    margin: 20px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(155,92,255,0.12);
+
+    border:
+        1px solid rgba(155,92,255,0.3);
+
+    color: #d8c4ff;
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+.round {
+    display: inline-block;
+
+    padding: 9px 18px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.07);
+
+    border: 1px solid var(--border);
+
+    color: #ccc;
+}
+
+/* =========================================
+   TIMER
+   ========================================= */
+
+.timer {
+    font-size: 28px;
+
+    font-weight: 800;
+
+    margin: 20px;
+
+    color: #ffffff;
+}
+
+/* =========================================
+   AI DISCUSSION
+   ========================================= */
+
+.ai-discussion {
+    text-align: left;
+
+    background:
+        rgba(5,5,9,0.75);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    min-height: 180px;
+}
+
+.ai-message {
+    display: flex;
+
+    gap: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(35,35,48,0.9),
+            rgba(18,18,25,0.9)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius: 15px;
+
+    padding: 16px;
+
+    margin: 12px 0;
+
+    animation: messageIn 0.4s ease;
+}
+
+.ai-name {
+    font-weight: 800;
+
+    color: #d1b7ff;
+}
+
+.ai-text {
+    color: #d6d6dc;
+
+    line-height: 1.5;
+}
+
+@keyframes messageIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   CHAT INPUT
+   ========================================= */
+
+.chat-input {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+.chat-input input {
+    flex: 1;
+
+    width: auto;
+
+    margin: 0;
+}
+
+/* =========================================
+   ROLE CARD
+   ========================================= */
+
+.role-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,30,42,0.95),
+            rgba(10,10,15,0.95)
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 24px;
+
+    padding: 45px 30px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.45);
+}
+
+/* =========================================
+   NIGHT PHASE
+   ========================================= */
+
+.night-screen {
+    min-height: 600px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.night-icon {
+    font-size: 110px;
+
+    margin: 25px;
+
+    animation: moonFloat 3s ease-in-out infinite;
+}
+
+@keyframes moonFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* =========================================
+   RESULT
+   ========================================= */
+
+.result {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,30,42,0.95),
+            rgba(12,12,18,0.95)
+        );
+
+    padding: 45px 30px;
+
+    border-radius: 24px;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.45);
+}
+
+.role-result {
+    background:
+        rgba(255,255,255,0.05);
+
+    padding: 14px;
+
+    margin: 8px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* =========================================
+   HINT
+   ========================================= */
+
+.hint {
+    color: #858590;
+
+    font-size: 14px;
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 650px) {
+
+    .container {
+        padding: 35px 12px;
+    }
+
+    h1 {
+        font-size: 40px;
+
+        letter-spacing: 2px;
+    }
+
+    .panel {
+        padding: 22px 15px;
+    }
+
+    .players {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-input {
+        flex-direction: column;
+    }
+
+    .chat-input input {
+        width: 100%;
+    }
+
+    button {
+        width: auto;
+    }
+}

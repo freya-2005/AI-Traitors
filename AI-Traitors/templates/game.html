@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Traitors - Game</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="game-container">
+
+    <h1>🕵️ AI TRAITORS</h1>
+
+    <div class="round">
+        ROUND 1
+    </div>
+
+    <div class="phase">
+        ☀️ DAY PHASE
+    </div>
+
+
+    <!-- PLAYERS -->
+
+    <div class="panel">
+
+        <h2>👥 Players</h2>
+
+        <div class="players">
+
+            {% for player in players %}
+
+            <div class="player-card
+                {% if player not in alive_players %}
+                dead
+                {% endif %}">
+
+                {% if player in alive_players %}
+
+                    <div class="status">
+                        🟢 ALIVE
+                    </div>
+
+                {% else %}
+
+                    <div class="status">
+                        🔴 ELIMINATED
+                    </div>
+
+                {% endif %}
+
+                <h3>
+                    👤 {{ player }}
+                </h3>
+
+                {% if player not in alive_players %}
+
+                    <p>
+                        ☠️ Eliminated
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- DISCUSSION -->
+
+    <div class="panel">
+
+        <h2>💬 Discussion</h2>
+
+        <div class="chat">
+    <p>
+        <strong>System:</strong>
+        Discuss who you think is the Traitor.
+    </p>
+
+    {% for message in history %}
+
+        {% if "🤖" in message %}
+
+            <p>
+                {{ message }}
+            </p>
+
+        {% endif %}
+
+    {% endfor %}
+
+</div>
+
+<form action="/ai-discussion" method="POST">
+
+    <button type="submit">
+        🧠 START AI DISCUSSION
+    </button>
+
+</form>
+
+</div>
+        <br>
+
+        <input
+            type="text"
+            placeholder="Type your message..."
+        >
+
+        <button>
+            SEND
+        </button>
+
+    </div>
+
+
+    <!-- VOTING -->
+
+    <div class="panel">
+
+        <h2>🗳️ VOTING</h2>
+
+        <p>
+            Each alive player must vote.
+        </p>
+
+        <p>
+            Votes submitted:
+            <strong>
+                {{ voters|length }} / {{ alive_players|length }}
+            </strong>
+        </p>
+
+
+        <form action="/vote" method="POST">
+
+            <label>
+                Who are you?
+            </label>
+
+            <br>
+
+            <select name="voter" required>
+
+                <option value="">
+                    Select your name
+                </option>
+
+                {% for player in alive_players %}
+
+                    {% if player not in voters %}
+
+                    <option value="{{ player }}">
+                        {{ player }}
+                    </option>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </select>
+
+
+            <br><br>
+
+
+            <label>
+                Who do you suspect?
+            </label>
+
+            <br>
+
+            <select name="target" required>
+
+                <option value="">
+                    Select a player
+                </option>
+
+                {% for player in alive_players %}
+
+                    <option value="{{ player }}">
+                        {{ player }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <br><br>
+
+
+            <button type="submit">
+                🗳️ CAST VOTE
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- VOTE COUNT -->
+
+    {% if vote_counts %}
+
+    <div class="panel">
+
+        <h2>📊 Current Votes</h2>
+
+        {% for player, count in vote_counts.items() %}
+
+            <p>
+                👤 {{ player }} :
+                <strong>{{ count }} vote(s)</strong>
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- NIGHT -->
+
+    <div class="panel">
+
+        <h2>🌙 Night Phase</h2>
+
+        <p>
+            After voting, start the night phase.
+        </p>
+
+        <a href="/night">
+
+            <button>
+                🌙 START NIGHT
+            </button>
+
+        </a>
+
+    </div>
+
+
+    <!-- HISTORY -->
+
+    <div class="panel">
+
+        <h2>📜 Game History</h2>
+
+        <p>
+            🎮 Game started.
+        </p>
+
+        {% if eliminated %}
+
+            {% for player in eliminated %}
+
+            <p>
+                ☠️ {{ player }} was eliminated.
+            </p>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>
+                No players have been eliminated yet.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script src="/static/game.js"></script>
+
+</body>
+
+</html>
